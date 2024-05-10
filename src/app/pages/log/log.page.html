@@ -1,48 +1,9 @@
 <ion-content [fullscreen]="true" class="text-center">
 
-  <ion-header [translucent]="true">
-    <ion-toolbar color="secondary" class="ion-text-center">
-      <ion-title>
-        <br>
-        @if(register){
-        REGISTRAR USUARIO
-        }
-        @else{
-        INGRESAR USUARIO
-        }
-      </ion-title>
-      <br>
-    </ion-toolbar>
-  </ion-header>
-
-
   <form [formGroup]="form" class="login" (ngSubmit)="onSubmit()">
     <ion-card color="secondary" class="ion-text-center">
 
-      <ion-card-header class="ion-text-center" color="tertiary">
-        <br>
-        Acceso Rápido
-        <ion-grid>
-          <ion-row class="ion-justify-content-between ion-align-items-center">
-            <ion-col size="3">
-              <ion-button (click)="logAccount1()" [ngClass]="selected === 1 ? 'selected' : 'notselected'" size="large">
-                <ion-icon name="person" color="primary"></ion-icon>
-              </ion-button>
-            </ion-col>
-            <ion-col size="3">
-              <ion-button (click)="logAccount2()" [ngClass]="selected === 2 ? 'selected' : 'notselected'" size="large">
-                <ion-icon name="person" color="primary"></ion-icon>
-              </ion-button>
-            </ion-col>
-            <ion-col size="3">
-              <ion-button (click)="logAccount3()" [ngClass]="selected === 3 ? 'selected' : 'notselected'" size="large">
-                <ion-icon name="person" color="primary"></ion-icon>
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        <br>
-      </ion-card-header>
+
 
       @if(!register){
       <br>
@@ -68,42 +29,72 @@
           }
         </ion-list>
 
-        @if(!register){
-        <br>
-        <br>
-        }
 
-        <ion-grid>
-          <ion-row class="ion-justify-content-center">
-            <ion-col size="6">
-              <ion-button type="submit" color="tertiary" size="large" expand="full">
-                <div>
-                  <img src="assets/icon.png" alt="logo">
-                </div>
-                <!-- <ion-icon name="log-in" size="large"></ion-icon>
-                  @if(register){
-                  REGISTRAR
-                  }
-                  @else{
-                  INGRESAR
-                  } -->
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+
+
       </ion-card-content>
       <br>
       <ion-card-subtitle>
         @if(register){
-        <a id="mode" (click)="changeMode()" class="text-bold"> Ingresar</a>
+        Ya tienes cuenta?<a id="mode" (click)="changeMode()" class="text-bold"> Ingresar</a>
         }
         @else{
-        <a id="mode" (click)="changeMode()" class="text-bold"> Registrarse</a>
+        Aún no tienes cuenta?<a id="mode" (click)="changeMode()" class="text-bold"> Registrarse</a>
         }
       </ion-card-subtitle>
+      @if(!register){
+      <br>
+      <br>
+      }
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="6">
+            <ion-button type="submit" color="tertiary" size="large" expand="full" shape="round">
+              <div>
+                <img src="assets/icon.png" alt="logo">
+              </div>
+              <!-- <ion-icon name="log-in" size="large"></ion-icon>
+                @if(register){
+                REGISTRAR
+                }
+                @else{
+                INGRESAR
+                } -->
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
       <br>
 
       <br>
+      <ion-card-header class="ion-text-center" color="tertiary">
+        <br>
+
+        <ion-grid>
+          <ion-row class="ion-justify-content-between ion-align-items-center">
+            <ion-col size="3">
+              <ion-button (click)="logAccount1()" [ngClass]="selected === 1 ? 'selected' : 'notselected'" size="large"
+                shape="round">
+                <ion-icon name="person" color="primary"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="3">
+              <ion-button (click)="logAccount2()" [ngClass]="selected === 2 ? 'selected' : 'notselected'" size="large"
+                shape="round">
+                <ion-icon name="person" color="primary"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="3">
+              <ion-button (click)="logAccount3()" [ngClass]="selected === 3 ? 'selected' : 'notselected'" size="large"
+                shape="round">
+                <ion-icon name="person" color="primary"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        Acceso Rápido
+        <br>
+      </ion-card-header>
     </ion-card>
 
 
@@ -112,3 +103,20 @@
   </form>
 
 </ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar color="secondary" class="ion-text-center">
+    <ion-title>
+      <br>
+      <br>
+      @if(register){
+      REGISTRAR USUARIO
+      }
+      @else{
+      INGRESAR USUARIO
+      }
+    </ion-title>
+    <br>
+    <br>
+  </ion-toolbar>
+</ion-footer>
