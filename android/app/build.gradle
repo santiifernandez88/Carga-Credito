@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "pps.mem.tes"
+    namespace "pps.car.cre"
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "pps.mem.tes"
+        applicationId "pps.car.cre"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

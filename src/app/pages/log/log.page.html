@@ -33,7 +33,9 @@
 
 
       </ion-card-content>
+      @if(!register){
       <br>
+      }
       <ion-card-subtitle>
         @if(register){
         Ya tienes cuenta?<a id="mode" (click)="changeMode()" class="text-bold"> Ingresar</a>
@@ -44,7 +46,7 @@
       </ion-card-subtitle>
       @if(!register){
       <br>
-      <br>
+
       }
       <ion-grid>
         <ion-row class="ion-justify-content-center">
@@ -64,11 +66,13 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+      @if(!register){
       <br>
+      }
 
-      <br>
+
       <ion-card-header class="ion-text-center" color="tertiary">
-        <br>
+
 
         <ion-grid>
           <ion-row class="ion-justify-content-between ion-align-items-center">

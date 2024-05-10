@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'pps.mem.tes',
-  appName: 'MemoTest',
+  appId: 'pps.car.cre',
+  appName: 'Carga Credito',
   webDir: 'www',
   server: {
     androidScheme: 'https'

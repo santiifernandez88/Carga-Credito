@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">MemoTest</string>
-    <string name="title_activity_main">MemoTest</string>
-    <string name="package_name">pps.mem.tes</string>
-    <string name="custom_url_scheme">pps.mem.tes</string>
+    <string name="app_name">Carga Credito</string>
+    <string name="title_activity_main">Carga Credito</string>
+    <string name="package_name">pps.car.cre</string>
+    <string name="custom_url_scheme">pps.car.cre</string>
 </resources>
