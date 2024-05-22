@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { AuthService } from '../services/auth.service';
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { AuthService } from '../services/auth.service';
     ReactiveFormsModule
 
   ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page],
+  providers: []
 })
 export class Tab1PageModule { }

@@ -32,8 +32,11 @@ export class LogPage implements OnInit {
   onSubmit() {
     this.user =
     {
+      id: '',
       email: this.form.controls['email'].value,
       password: this.form.controls['password'].value,
+      codes: [],
+      credito: 0,
     }
     console.log(this.user);
 

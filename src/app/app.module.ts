@@ -13,6 +13,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 
 
@@ -30,7 +31,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     provideFirebaseApp(() => initializeApp({ "projectId": "app-ionic-bce4b", "appId": "1:991135051563:web:35573abe8ba080bc2edf6e", "storageBucket": "app-ionic-bce4b.appspot.com", "apiKey": "AIzaSyCeYQWaim36BZ2StQkJK-S8vDbpmghpeFA", "authDomain": "app-ionic-bce4b.firebaseapp.com", "messagingSenderId": "991135051563", "measurementId": "G-G9WFXLTDGF" })),
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideCharts(withDefaultRegisterables())],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

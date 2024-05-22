@@ -1,1 +1,5 @@
-
+/* Note: These styles should be located in your global stylesheet */
+.custom-class {
+    --background-color: var(--ion-color-secondary) !important;
+    color: #000000 !important;
+}

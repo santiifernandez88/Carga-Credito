@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'pps.car.cre',
-  appName: 'Carga Credito',
+  appName: 'Carga Crédito',
   webDir: 'www',
   server: {
     androidScheme: 'https'
