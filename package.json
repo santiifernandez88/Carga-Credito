@@ -10,6 +10,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
+    "reset": "npx cap sync && ionic cap sync && npx cap open android",
     "deploy-android": "ionic build && npx cap sync android && ionic capacitor build android",
     "deploy": "rm -rf android && ng build && npx cap add android && npx cap open android && npx @capacitor/assets generate --iconBackgroundColor #eeeeee --iconBackgroundColorDark #222222 --splashBackgroundColor #eeeeee --splashBackgroundColorDark #111111"
   },

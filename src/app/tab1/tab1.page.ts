@@ -16,6 +16,7 @@ export class Tab1Page implements OnInit {
   isSupported = false;
   barcodes: Barcode[] = [];
   user!: User;
+  codigo!: string;
 
   constructor(private alertController: AlertController, private userService: UserService, private auth: AuthService) { }
 
@@ -36,6 +37,50 @@ export class Tab1Page implements OnInit {
       })
   }
 
+
+  async credits() {
+    let cantidadCargas = 1;
+
+    if (this.user.role == "admin") {
+      cantidadCargas = 2;
+    }
+
+    if (this.countOccurrences(this.user.codes, this.codigo) < cantidadCargas) {
+      switch (this.codigo) {
+        case "8c95def646b6127282ed50454b73240300dccabc":
+          this.user.credito += 10
+          break;
+        case "ae338e4e0cbb4e4bcffaf9ce5b409feb8edd5172 ":
+          this.user.credito += 50
+          break;
+        case "2786f4877b9091dcad7f35751bfcf5d5ea712b2f":
+          this.user.credito += 100
+          break;
+
+      }
+      this.user.codes.push(this.codigo)
+      await this.userService.updateUser(this.user);
+    } else {
+      const alert = await this.alertController.create({
+        header: 'Código utilizado',
+        message: `No puede utilizar más de ${cantidadCargas} vez este código QR`,
+        buttons: ['OK'],
+      });
+      await alert.present();
+    }
+
+  }
+
+  countOccurrences(arr: string[], value: string): number {
+    return arr.reduce((count, current) => current === value ? count + 1 : count, 0);
+  }
+
+  async reset() {
+    this.user.codes = [];
+    this.user.credito = 0;
+    await this.userService.updateUser(this.user);
+  }
+
   async scan(): Promise<void> {
     const granted = await this.requestPermissions();
     if (!granted) {
@@ -44,25 +89,9 @@ export class Tab1Page implements OnInit {
     }
     const { barcodes } = await BarcodeScanner.scan();
 
+    this.codigo = barcodes[0].rawValue;
 
-    if (!this.user.codes.includes(barcodes[0].rawValue)) {
-      this.barcodes.push(...barcodes);
-      this.user.codes.push(barcodes[0].rawValue);
-      const alert = await this.alertController.create({
-        header: 'Código utilizado',
-        message: barcodes[0].rawValue,
-        buttons: ['OK'],
-      });
-      await alert.present();
-
-    } else {
-      const alert = await this.alertController.create({
-        header: 'Código utilizado',
-        message: 'Ya no puede utilizar este código QR',
-        buttons: ['OK'],
-      });
-      await alert.present();
-    }
+    await this.credits();
   }
 
   async requestPermissions(): Promise<boolean> {
@@ -78,4 +107,6 @@ export class Tab1Page implements OnInit {
     });
     await alert.present();
   }
+
+
 }

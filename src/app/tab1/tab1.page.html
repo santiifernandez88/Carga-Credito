@@ -5,20 +5,52 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <!-- <ion-list>
     <ion-item *ngFor="let barcode of barcodes">
       <ion-label position="stacked">{{ barcode.format }}</ion-label>
       <ion-input type="text" [value]="barcode.rawValue"></ion-input>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
+
+  @if (user){
+  <ion-card color="secondary" class="ion-text-center">
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="8" style="padding-top: 2.4rem;">
+          <ion-text>
+            <h1>
+              @if (user.credito != 0) {
+              {{user.credito}} Créditos
+              }
+              @else {
+              Sin Créditos
+              }
+            </h1>
+          </ion-text>
+        </ion-col>
+        <ion-col size="3">
+          <ion-img src="assets/tarjeta.png" alt="tarjeta" style="width: 150%;"></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+
+    <ion-card-subtitle style="margin-bottom: 0.5rem;">
+      <ion-button shape="round" (click)="reset()">
+        LIMPIAR CREDITOS
+      </ion-button>
+
+    </ion-card-subtitle>
+  </ion-card>
+  }
+
 
 
   <div class="contenedor">
-
-    <ion-button (click)="scan()" color="tertiary" class="boton" style="width: 80%;height: 50%;" shape="round">
-      <!-- <ion-icon name="scan" size="xlarge"></ion-icon> -->
+    <ion-button (click)="scan()" color="tertiary" class="boton" style="width: 80%;height: 50%;margin-top: 5.9rem;"
+      shape="round">
       <img src="assets/scan.png" alt="scan">
     </ion-button>
   </div>
+
 
 </ion-content>
