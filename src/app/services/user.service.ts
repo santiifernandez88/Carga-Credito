@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user';
-import { Firestore, addDoc, collection, doc, setDoc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, doc, getDocs, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { onSnapshot, query } from 'firebase/firestore';
 
@@ -10,7 +10,7 @@ import { onSnapshot, query } from 'firebase/firestore';
 })
 export class UserService {
 
-  private dataRef = collection(this.firestore, 'users');
+  private dataRef = collection(this.firestore, 'usuarios');
 
   constructor(private firestore: Firestore) { }
 
@@ -21,17 +21,20 @@ export class UserService {
     return setDoc(docs, user);
   }
 
-  getUserByEmail(email: string): Observable<User> {
-    return new Observable<User>((observer) => {
-      onSnapshot(this.dataRef, (snap) => {
-        snap.docChanges().forEach(x => {
-          const data = x.doc.data() as User;
-          if (data.email === email) {
-            observer.next(data);
-          }
-        });
-      });
-    });
+  async getUserByEmail(email: string): Promise<User | null> {
+    try {
+      const q = query(this.dataRef, where('email', '==', email));
+      const snap = await getDocs(q);
+      if (!snap.empty) {
+        const data = snap.docs[0].data() as User;
+        return data;
+      } else {
+        return null; // No se encontró ningún usuario con ese correo electrónico
+      }
+    } catch (error) {
+      console.error('Error al obtener usuario por email:', error);
+      return null;
+    }
   }
 
   async updateUser(user: User) {

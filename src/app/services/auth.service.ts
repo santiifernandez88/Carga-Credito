@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Firestore } from '@angular/fire/firestore';
-import { browserSessionPersistence, getAuth, setPersistence } from '@angular/fire/auth';
+import { Auth, UserCredential, browserSessionPersistence, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, setPersistence, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -10,27 +10,42 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  constructor(private afauth: AngularFireAuth, private firestore: Firestore, private router: Router) { }
+  userActive: any;
 
-  async login(user: User) {
-    return await this.afauth.signInWithEmailAndPassword(user.email, user.password);
+  constructor(private auth: Auth, private router: Router) {
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        this.userActive = user;
+      } else {
+        this.userActive = null;
+      }
+    });
   }
 
-  async register(user: User) {
-    return await this.afauth.createUserWithEmailAndPassword(user.email, user.password);
+  async login(email: string, password: string): Promise<UserCredential> {
+    const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
+    this.userActive = userCredential.user;
+    return userCredential;
   }
 
-  getUserLogged() {
-
-    return this.afauth.authState;
+  async register(email: string, password: string): Promise<UserCredential> {
+    const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+    this.userActive = userCredential.user;
+    return userCredential;
   }
 
   getUser() {
-    return this.afauth.currentUser
+    return this.userActive;
+  }
+
+  getUserEmail() {
+    return this.userActive ? this.userActive.email : null;
   }
 
   logout() {
-    this.afauth.signOut().then(() => this.router.navigate(['log']));
+    this.auth.signOut().then(() => {
+      this.userActive = null;
+      this.router.navigate(['login']);
+    });
   }
-
 }

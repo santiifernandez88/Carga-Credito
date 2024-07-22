@@ -5,7 +5,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getStorage, provideStorage } from '@angular/fire/storage';
@@ -24,12 +24,9 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
     IonicModule.forRoot(),
     AppRoutingModule,
     NgxSpinnerModule,
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirebaseApp(() => initializeApp(environment)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage()),
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    provideFirebaseApp(() => initializeApp({ "projectId": "app-ionic-bce4b", "appId": "1:991135051563:web:35573abe8ba080bc2edf6e", "storageBucket": "app-ionic-bce4b.appspot.com", "apiKey": "AIzaSyCeYQWaim36BZ2StQkJK-S8vDbpmghpeFA", "authDomain": "app-ionic-bce4b.firebaseapp.com", "messagingSenderId": "991135051563", "measurementId": "G-G9WFXLTDGF" })),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideCharts(withDefaultRegisterables())],
   bootstrap: [AppComponent],

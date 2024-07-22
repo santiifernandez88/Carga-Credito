@@ -1,27 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
-import { UserService } from '../services/user.service';
-import { AuthService } from '../services/auth.service';
-import { User } from '../interfaces/user';
-import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-
-
+import { User } from 'src/app/interfaces/user';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
+import { IonHeader, IonToolbar, IonTitle, IonContent, AlertController } from "@ionic/angular/standalone";
+import { Router } from '@angular/router';
+import { ResetConfirmationModalComponent } from '../reset-confirmation-modal/reset-confirmation-modal.component'; // Importa el componente del modal
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
+  standalone: true,
+  imports: [IonContent, IonTitle, IonToolbar, IonHeader, IonHeader, IonToolbar, IonTitle, IonContent],
 })
-export class Tab1Page implements OnInit {
+export class HomeComponent implements OnInit {
   isSupported = false;
   barcodes: Barcode[] = [];
   user!: User;
   codigo!: string;
   userSubscription!: Subscription;
 
-  constructor(private alertController: AlertController, private userService: UserService, private auth: AuthService, private router: Router) { }
+  constructor(
+    private modalController: ModalController, 
+    private userService: UserService, 
+    private auth: AuthService, 
+    private router: Router,
+    private alertController : AlertController
+  ) { }
 
   async ngOnInit() {
     await this.loadUser();
@@ -33,9 +41,8 @@ export class Tab1Page implements OnInit {
         if (!res.available) {
           BarcodeScanner.installGoogleBarcodeScannerModule();
         }
-      })
+      });
   }
-
 
   async loadUser() {
     const userEmail = this.auth.getUserEmail();
@@ -60,6 +67,7 @@ export class Tab1Page implements OnInit {
 
   async credits() {
     let cantidadCargas = 1;
+
     if (this.user.perfil == "admin") {
       cantidadCargas = 2;
     }
@@ -67,17 +75,16 @@ export class Tab1Page implements OnInit {
     if (this.countOccurrences(this.user.codes, this.codigo) < cantidadCargas) {
       switch (this.codigo) {
         case "8c95def646b6127282ed50454b73240300dccabc":
-          this.user.credito += 10
+          this.user.credito += 10;
           break;
         case "ae338e4e0cbb4e4bcffaf9ce5b409feb8edd5172 ":
-          this.user.credito += 50
+          this.user.credito += 50;
           break;
         case "2786f4877b9091dcad7f35751bfcf5d5ea712b2f":
-          this.user.credito += 100
+          this.user.credito += 100;
           break;
-
       }
-      this.user.codes.push(this.codigo)
+      this.user.codes.push(this.codigo);
       await this.userService.updateUser(this.user);
     } else {
       const alert = await this.alertController.create({
@@ -87,17 +94,34 @@ export class Tab1Page implements OnInit {
       });
       await alert.present();
     }
-
   }
 
   countOccurrences(arr: string[], value: string): number {
     return arr.reduce((count, current) => current === value ? count + 1 : count, 0);
   }
 
-  async reset() {
+  async presentResetConfirmation() {
+    const modal = await this.modalController.create({
+      component: ResetConfirmationModalComponent,
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+
+    if (data && data.confirmed) {
+      await this.performReset();
+    }
+  }
+
+  async performReset() {
     this.user.codes = [];
     this.user.credito = 0;
     await this.userService.updateUser(this.user);
+  }
+
+  async reset() {
+    await this.presentResetConfirmation();
   }
 
   async scan(): Promise<void> {
@@ -121,15 +145,14 @@ export class Tab1Page implements OnInit {
   async presentAlert(): Promise<void> {
     const alert = await this.alertController.create({
       header: 'Permiso denegado',
-      message: 'Porfavor de permisos a la aplicacion para usar la camara.',
+      message: 'Por favor, otorgue permisos a la aplicación para usar la cámara.',
       buttons: ['OK'],
     });
     await alert.present();
   }
 
-  CloseSession(){
+  CloseSession() {
     this.auth.logout();
     this.router.navigateByUrl("login");
   }
-
 }

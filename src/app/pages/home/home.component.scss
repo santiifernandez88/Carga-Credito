@@ -1,0 +1,285 @@
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    height: 170px;
+    width: 400px;
+    margin: 0 auto;
+  
+  }
+  
+  b {
+    width: 100%;
+  }
+  
+  .ripple-parent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    position: relative;
+    overflow: hidden;
+  
+    border: 1px solid #ddd;
+  
+    user-select: none;
+  }
+  
+  .rounded-rectangle {
+    width: 250px;
+    height: 75px;
+    border-radius: 8px;
+  }
+  
+  .circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+  }
+  
+  body.scanner-active {
+    --background: transparent;
+    --ion-background-color: transparent;
+  }
+  
+  .list-md,
+  .item-md {
+    background-color: var(--ion-color-primary);
+  }
+  
+  .boton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  ion-card {
+    border-top: 5px solid var(--ion-color-tertiary) !important;
+    border-right: 5px solid var(--ion-color-tertiary) !important;
+    box-shadow: 0 !important;
+  }
+  
+  ion-button {
+    --box-shadow: 0 4px 12px 0 rgb(0, 0, 0, 0.25);
+  }
+  
+  .fondo {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        transparent 33.33%,
+        rgba(57, 144, 179, 0.1) 33.33%,
+        rgba(0, 0, 0, 0.1) 66.66%,
+        transparent 66.66%
+      ),
+      lightblue;
+    background-size: 20px 20px;
+    padding: 20px;
+  }
+  
+  .card {
+    width: 300px;
+    height: 220px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    background-color: #256c9cb0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.062);
+  }
+  
+  #cookieSvg {
+    width: 50px;
+  }
+  
+  #cookieSvg g path {
+    fill: rgb(97, 81, 81);
+  }
+  
+  .cookieHeading {
+    /* Estilos para el texto "Créditos" */
+    font-size: 20px;
+    font-weight: 900;
+    color: rgb(255, 255, 255);
+  }
+  
+  .cookieDescription {
+    text-align: center;
+    font-size: 25px; /* Cambié de 30px a 1.1em */
+    font-weight: 900;
+    color: rgb(254, 254, 254);
+  }
+  
+  .creditos-container {
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos */
+    gap: 10px; /* Espacio entre la imagen y el texto */
+  }
+  
+  .title-image {
+    height: 80px; /* Ajusta la altura de la imagen según sea necesario */
+  }
+  
+
+  .buttonContainer {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+  }
+  
+  .acceptButton {
+    width: 150px;
+    height: 50px;
+    background-color: #f50606;
+    transition-duration: .2s;
+    border: none;
+    color: rgb(241, 241, 241);
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 20px;
+  }
+  
+  .declineButton {
+    width: 80px;
+    height: 30px;
+    background-color: rgb(218, 218, 218);
+    transition-duration: .2s;
+    color: rgb(46, 46, 46);
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 20px;
+  }
+  
+  .declineButton:hover {
+    background-color: #ebebeb;
+    transition-duration: .2s;
+  }
+  
+  .acceptButton:hover {
+    background-color: #3ba9f3;
+    transition-duration: .2s;
+  }
+  
+  .custom-toolbar {
+    --background: #3498db; /* Cambia esto al color que prefieras */
+    --color: white; /* Color del texto en la barra de herramientas */
+  }
+  
+  .title {
+    margin-left: auto; /* Empuja el título hacia la izquierda */
+    margin-right: auto; /* Empuja el título hacia la derecha */
+  }
+  
+  .toolbar-content {
+    display: flex;
+    justify-content: space-between; /* Distribuye los elementos a los extremos */
+    align-items: center; /* Centra verticalmente los elementos */
+    width: 100%; /* Ocupa todo el ancho de la barra de herramientas */
+  }
+  
+  .btn-donate {
+    --clr-font-main: hsla(0 0% 20% / 100);
+    --btn-bg-1: hsla(194 100% 69% / 1);
+    --btn-bg-2: hsla(217 100% 56% / 1);
+    --btn-bg-color: hsla(360 100% 100% / 1);
+    --radii: 0.5em;
+    cursor: pointer;
+    padding: 0.9em 1.4em;
+    min-width: 120px;
+    min-height: 44px;
+    font-size: var(--size, 1rem);
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-weight: 500;
+    transition: 0.8s;
+    background-size: 280% auto;
+    background-image: linear-gradient(325deg, var(--btn-bg-2) 0%, var(--btn-bg-1) 55%, var(--btn-bg-2) 90%);
+    border: none;
+    border-radius: var(--radii);
+    color: var(--btn-bg-color);
+    box-shadow: 0px 0px 20px rgba(71, 184, 255, 0.5), 0px 5px 5px -1px rgba(58, 125, 233, 0.25), inset 4px 4px 8px rgba(175, 230, 255, 0.5), inset -4px -4px 8px rgba(19, 95, 216, 0.35);
+    margin-left: 50px;
+    margin-top: 40px;
+  }
+  
+  .btn-donate:hover {
+    background-position: right top;
+  }
+  
+  .btn-donate:is(:focus, :focus-visible, :active) {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--btn-bg-color), 0 0 0 6px var(--btn-bg-2);
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .btn-donate {
+      transition: linear;
+    }
+  }
+  
+  .Btn {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra la imagen dentro del botón */
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    background-color: #256c9cb0;
+    margin-left: auto; /* Asegura que el botón esté pegado a la derecha */
+  }
+  
+  /* plus sign */
+  .sign {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sign svg {
+    width: 17px;
+  }
+  
+  .sign svg path {
+    fill: white;
+  }
+  
+  /* Elimina la clase .text si no se necesita */
+  .text {
+    display: none;
+  }
+  
+  /* Elimina los estilos de animación y hover */
+  .Btn:hover,
+  .Btn:hover .sign,
+  .Btn:hover .text,
+  .Btn:active {
+    transform: none;
+    width: 45px;
+    border-radius: 50%;
+    opacity: 1;
+    padding-left: 0;
+    padding-right: 0;
+    transition: none;
+    box-shadow: none;
+  }
+  
+  ion-alert {
+    --background: #000; /* Fondo negro */
+    --color: #fff; /* Texto blanco */
+    --button-background-hover: #333; /* Fondo de los botones cuando se pasa el ratón por encima */
+    --button-color-hover: #fff; /* Color del texto de los botones cuando se pasa el ratón por encima */
+  }
